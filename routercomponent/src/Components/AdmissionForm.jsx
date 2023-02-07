@@ -12,9 +12,12 @@ import Button from "@mui/material/Button";
 import FormUpdate from "./formUpdate";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
+import { useNavigate } from "react-router-dom";
+import ConfirmationPage from "./ConfirmationPage";
 
 
 const AdmissionForm = (props) => {
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState();
     const [middleName, setMiddleName] = useState();
     const [lastName, setLastName] = useState();
@@ -110,6 +113,14 @@ const AdmissionForm = (props) => {
 
 
     };
+    const goToAdmissionAcceptForm=()=>{
+
+            navigate("/confirm",{state:{completeForm}});
+            
+            
+        }        
+    
+
     // useEffect(() => {
     //     setGender('female');
 
@@ -174,7 +185,7 @@ const AdmissionForm = (props) => {
                                             onChange={firstNameChange}
                                             variant="outlined" />
                                     </Grid>
-                                     <Grid item sm={12} md={12} lg={4}>
+                                    <Grid item sm={12} md={12} lg={4}>
                                         <TextField id="outlined-basic"
                                             label="MiddleName"
                                             value={middleName}
@@ -192,50 +203,50 @@ const AdmissionForm = (props) => {
                             </Grid>
                             <br />
                             <Grid container spacing={2}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between"
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between"
 
 
-                                }}
-                            >
-                                 
-
-                                <FormControl>
-                                    <FormLabel id="demo-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>Gender</FormLabel>
+                                    }}
+                                >
 
 
-                                    <Grid item sm={12} md={12} lg={4}>
-                                      <RadioGroup
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        name="radio-buttons-group"
-                                        value={gender}
-                                        onChange={onGenderName}
-                                    >
-
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                                    </RadioGroup>
-                                    </Grid>
-                                </FormControl>
-                                {/*coffee like plain,milk,dark,expresspo  */}
-                                <FormControl sx={{ width: 300, marginLeft: 40 }} component="fieldset" variant="standard">
-                                    <FormGroup>
-                                        <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "plain")} />} label="plain"
-                                        />
-                                        <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "milk")} />} label="milk"
-                                        />
-                                        <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "dark")} />} label="dark"
-                                        />
-                                        <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "exprespo")} />} label="exprespo"
-                                        />
+                                    <FormControl>
+                                        <FormLabel id="demo-radio-buttons-group-label" sx={{ fontWeight: "bold" }}>Gender</FormLabel>
 
 
-                                    </FormGroup>
-                                </FormControl>
-                            </Box>
+                                        <Grid item sm={12} md={12} lg={4}>
+                                            <RadioGroup
+                                                aria-labelledby="demo-radio-buttons-group-label"
+                                                name="radio-buttons-group"
+                                                value={gender}
+                                                onChange={onGenderName}
+                                            >
+
+                                                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                            </RadioGroup>
+                                        </Grid>
+                                    </FormControl>
+                                    {/*coffee like plain,milk,dark,expresspo  */}
+                                    <FormControl sx={{ width: 300, marginLeft: 40 }} component="fieldset" variant="standard">
+                                        <FormGroup>
+                                            <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "plain")} />} label="plain"
+                                            />
+                                            <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "milk")} />} label="milk"
+                                            />
+                                            <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "dark")} />} label="dark"
+                                            />
+                                            <FormControlLabel control={<Checkbox onChange={(event) => handleCoffeeChange(event, "exprespo")} />} label="exprespo"
+                                            />
+
+
+                                        </FormGroup>
+                                    </FormControl>
+                                </Box>
                             </Grid>
 
                             <br />
@@ -276,10 +287,7 @@ const AdmissionForm = (props) => {
                                 </FormControl>
 
                             </Box>
-
-
-
-                            <Box
+                              <Box
                                 sx={{
                                     marginY: 2,
                                     display: "flex",
@@ -321,7 +329,8 @@ const AdmissionForm = (props) => {
                                             <></>
                                         )
                                     }
-                                    onClick={handleSubmit}>
+                                    // onClick={handleSubmit}>
+                                    onClick={goToAdmissionAcceptForm}>
                                     Submit
                                 </Button>
 
@@ -334,8 +343,17 @@ const AdmissionForm = (props) => {
                     <pre>{JSON.stringify(completeForm, null, 3)}</pre>
 
                 </Container>
-
+                
                 <FormUpdate info={formToPropogate} />
+                <Box>
+                    <Button vaiant="contained"
+                     onClick={()=>{
+                        navigate(-1);
+                     }}
+                     >
+                     back</Button>
+                </Box>
+
             </React.Fragment>
 
 
